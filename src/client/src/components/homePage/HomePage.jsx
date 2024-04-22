@@ -10,7 +10,7 @@ function HomePage() {
 
     return (
         <div>
-            <h2>Hydr Map</h2>
+            <h2>Hydro Map</h2>
             <HeaderComp onPageChange={changePageStatus} />
             <h2>Contenu de la page d'accueil</h2>
         </div>
