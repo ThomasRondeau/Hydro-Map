@@ -17,7 +17,7 @@ CREATE TABLE contributor(
 CREATE TABLE PCH(
    id_pch INT AUTO_INCREMENT,
    position POINT,
-   pchName VARCHAR(100),
+   PCHName VARCHAR(100),
    technology VARCHAR(100),
    presentation VARCHAR(1000),
    id_contributor INT,
