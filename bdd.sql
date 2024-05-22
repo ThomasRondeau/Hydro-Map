@@ -8,7 +8,7 @@ CREATE TABLE contributor(
    id_contributor INT AUTO_INCREMENT,
    firstName VARCHAR(100),
    lastName VARCHAR(100),
-   email VARCHAR(100),
+   email VARCHAR(100) UNIQUE,
    password VARCHAR(100),
    institution VARCHAR(100),
    PRIMARY KEY(id_client)

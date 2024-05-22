@@ -4,7 +4,7 @@ export default class Contributor{
         private firstName:string,
         private lastName:string,
         private email:string,
-        private institution:string,
-        private password:string
+        private password:string,
+        private institution:string
     ){} 
 }
