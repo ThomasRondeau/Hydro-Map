@@ -1,12 +1,12 @@
 import { Router } from "express";
-import {} from "../controllers/ContributorController.js"
+import {loginContributor, logoutContributor, getContributorCall} from "../controllers/ContributorController.js"
 
 const userRouter = Router();
 
-userRouter.post('/login_client', loginUser);
+userRouter.post('/login_client', loginContributor);
 
-userRouter.post('/logout', logoutUser);
+userRouter.post('/logout', logoutContributor);
 
-userRouter.post('/getprofile', getUser);
+userRouter.post('/getprofile', getContributorCall);
 
 export default userRouter;

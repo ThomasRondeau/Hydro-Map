@@ -1,38 +1,26 @@
-import Contributor from "../models/ContributorModel";
-import connection from "./DbConnection";
+import Contributor from "../models/ContributorModel.js";
+import {loginContributorCall, getContributor} from "../services/ContributorServices.js"
 
-function getContributor(req, res){
-    const userId = req.body.id;
-    try {
-        return Contributor.getUser(userId)
-    } catch (error) {
-        console.log(error)
-    }
+export async function loginContributor(req:any, res:any, next:any){
+  // Voir si pas plus rapide de juste faire un requete pour récupérer le mot de passe puis seulement faire un get
+  try {
+    res.json(await loginContributorCall(req.body)) 
+  } catch (error:any) {
+    res.json("Error while trying to log contributor", error.message)
+    next(error)
+  }
 }
 
-function loginContributor(req, res) {
-  const email = req.body.email;
-  const password = req.body.password;
-  const query = 'SELECT id_contributor, password FROM contributor WHERE email = ?';
-
-
-
-
-
-  var lancement = Contributor.loginUser(email, password, (error_id, boolean, result) =>{
-
-    console.log('error_id : ', error_id)
-    if(boolean){
-      req.session.typeOfUser = "client"
-      req.session.userId = result
-      res.redirect('/accueil')
-    }else{
-      res.send("Identifiant et/ou mot de passe incorrects")
-    }
-  })
+export async function getContributorCall(req:any, res:any, next:any){
+  try {
+    res.json(await getContributor(req.body.email)) 
+  } catch (error:any) {
+    res.json("Error while trying to log contributor", error.message)
+    next(error)
+  }
 }
-
-function logoutContributor(req, res){
-    req.session.destroy()
-    res.redirect('/home')
+export function logoutContributor(req:any, res:any, next:any){
+  req.session.destroy();
+  res.redirect('/home');
+  next();
 }

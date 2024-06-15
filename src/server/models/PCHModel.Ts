@@ -1,5 +1,5 @@
-import position from "./positionModel";
-import Contributor from "./ContributorModel";
+import position from "./positionModel.js";
+import Contributor from "./ContributorModel.js";
 
 export default class PCH{
     constructor(

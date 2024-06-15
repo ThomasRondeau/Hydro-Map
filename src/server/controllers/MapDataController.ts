@@ -1,13 +1,51 @@
-import PCH from "../models/PCHModel";
-import InterestPoint from "../models/InterestPointModel";
-import connection from "./DbConnection";
+import PCH from "../models/PCHModel.js";
+import InterestPoint from "../models/InterestPointModel.js";
+import {getPointsFromCsv} from "../services/MapDataServices.js"
 
-export function createPCH(req, res){
-
+export async function getInterestPoints(req:any, res:any, next:any){
+    try {
+        let json = JSON.stringify(getPointsFromCsv());
+        res.json(json)
+    } catch (error: any) {
+        console.error("Error while sending Interest points", error.message)
+        next(error);        
+    }
 }
 
-export function createInterestPoint(req,res){
-
+/*
+export async function createPCH(req, res, next){
+    try {
+        res.json(await service.createPCH()) // Passer un modele en paramètre
+    } catch (error) {
+        console.error("Error while creating new PCH", error.message)
+        next(error);        
+    }
 }
 
-export function 
+export async function createInterestPoint(req,res, next){
+    try {
+        res.json(await service.createInterestPoint()) // Passer un modele en paramètre
+    } catch (error) {
+        console.error("Error while creating new Interest Point", error.message)
+        next(error);
+    }
+}
+
+export async function deletePCH(req, res, next){
+    try {
+        res.json(await service.deletePCH())
+    } catch (error) {
+        console.error("Error while deleting PCH", error.message)
+        next(error);
+    }
+}
+
+export async function deleteInterestPoint(req, res, next){
+    try {
+        res.json(await service.deleteInterestPoint())
+    } catch (error) {
+        console.error("Error while deleting Interest Point", error.message)
+        next(error);
+    }
+}
+    */
