@@ -27,6 +27,19 @@
 .App-link {
   color: #61dafb;
 }
+.map {
+  height: 600px;
+  width: 100%;
+}
+.navbar-home{
+  display: flex;
+  flex-direction: row;
+}
+.navbar-list{
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
+}
 
 @keyframes App-logo-spin {
   from {
