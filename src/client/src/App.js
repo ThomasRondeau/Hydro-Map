@@ -30,7 +30,7 @@ function App() {
           />
           <Marker position={position}>
             <Popup>
-              A pretty CSS3 popup. <br /> Easily customizable.
+              A pretty popup. <br /> 
             </Popup>
           </Marker>
         </MapContainer>
