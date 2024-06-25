@@ -1,4 +1,4 @@
-import { getPointsFromCsv } from "../services/MapDataServices.js";
+import { getPointsFromCsv, getPowerUnitsFromcsv } from "../services/MapDataServices.js";
 export async function getInterestPoints(req, res, next) {
     try {
         let json = JSON.stringify(await getPointsFromCsv());
@@ -6,6 +6,16 @@ export async function getInterestPoints(req, res, next) {
     }
     catch (error) {
         console.error("Error while sending Interest points", error.message);
+        next(error);
+    }
+}
+export async function getPowerUnits(req, res, next) {
+    try {
+        let json = JSON.stringify(await getPowerUnitsFromcsv());
+        res.json(json);
+    }
+    catch (error) {
+        console.error("Error while sending Power Units", error.message);
         next(error);
     }
 }

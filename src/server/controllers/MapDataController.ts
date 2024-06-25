@@ -1,6 +1,6 @@
 import PCH from "../models/PCHModel.js";
 import InterestPoint from "../models/InterestPointModel.js";
-import {getPointsFromCsv} from "../services/MapDataServices.js"
+import {getPointsFromCsv, getPowerUnitsFromcsv} from "../services/MapDataServices.js"
 
 export async function getInterestPoints(req:any, res:any, next:any){
     try {
@@ -8,6 +8,16 @@ export async function getInterestPoints(req:any, res:any, next:any){
         res.json(json)
     } catch (error: any) {
         console.error("Error while sending Interest points", error.message)
+        next(error);        
+    }
+}
+
+export async function getPowerUnits(req:any, res:any, next:any){
+    try {
+        let json = JSON.stringify(await getPowerUnitsFromcsv());
+        res.json(json)
+    } catch (error: any) {
+        console.error("Error while sending Power Units", error.message)
         next(error);        
     }
 }

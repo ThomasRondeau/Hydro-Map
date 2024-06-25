@@ -1,9 +1,11 @@
 import { Router } from "express";
-import {getInterestPoints} from "../controllers/MapDataController.js"; 
+import {getInterestPoints, getPowerUnits} from "../controllers/MapDataController.js"; 
 
 const mapDataRouter = Router();
 
-mapDataRouter.get('/getInterestsPoints', getInterestPoints)
+mapDataRouter.get('/getInterestsPoints', getInterestPoints);
+
+mapDataRouter.get('/getPowerUnits', getPowerUnits);
 /*
 mapDataRouter.post('/createPCH', createPCH);
 
