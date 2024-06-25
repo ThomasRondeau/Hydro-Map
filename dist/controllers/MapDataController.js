@@ -1,24 +1,21 @@
-import PCH from "../models/PCHModel.js";
-import InterestPoint from "../models/InterestPointModel.js";
-import {getPointsFromCsv} from "../services/MapDataServices.js"
-
-export async function getInterestPoints(req:any, res:any, next:any){
+import { getPointsFromCsv } from "../services/MapDataServices.js";
+export async function getInterestPoints(req, res, next) {
     try {
         let json = JSON.stringify(await getPointsFromCsv());
-        res.json(json)
-    } catch (error: any) {
-        console.error("Error while sending Interest points", error.message)
-        next(error);        
+        res.json(json);
+    }
+    catch (error) {
+        console.error("Error while sending Interest points", error.message);
+        next(error);
     }
 }
-
 /*
 export async function createPCH(req, res, next){
     try {
         res.json(await service.createPCH()) // Passer un modele en paramètre
     } catch (error) {
         console.error("Error while creating new PCH", error.message)
-        next(error);        
+        next(error);
     }
 }
 
@@ -48,4 +45,5 @@ export async function deleteInterestPoint(req, res, next){
         next(error);
     }
 }
-    */
+    */ 
+//# sourceMappingURL=MapDataController.js.map

@@ -1,58 +1,50 @@
-import Contributor from "../models/ContributorModel.js";
-
-
-export async function loginContributorCall(body:any){
-  /*
-    const email = body.email;
-    const password = body.password;
-    const query = 'SELECT id_contributor, password FROM contributor WHERE email = ?';
-
-    const results = await new Promise<any>((resolve, reject) => {
-    connection.query(query, [email], function(err, results) {
-        if (err) {
-        reject(err);
-        } else {
-        resolve(results);
-        }
-    });
-    });
-    return results;
-  */
-  return "logged or not, login working"
+export async function loginContributorCall(body) {
+    /*
+      const email = body.email;
+      const password = body.password;
+      const query = 'SELECT id_contributor, password FROM contributor WHERE email = ?';
+  
+      const results = await new Promise<any>((resolve, reject) => {
+      connection.query(query, [email], function(err, results) {
+          if (err) {
+          reject(err);
+          } else {
+          resolve(results);
+          }
+      });
+      });
+      return results;
+    */
+    return "logged or not, login working";
 }
-
-export async function getContributor(email:String){
-  /*
-    const query = `SELECT * FROM client WHERE email = ?`;
-
-    const results = await new Promise<any>((resolve, reject) => {
-        connection.query(query, [email], function(err, results) {
-            if (err) {
-            reject(err);
-            } else {
-            resolve(results);
-            }
-        });
-    });
-    if (results.lenght > 0) {
-      return results[0];
-  } else {
-      return undefined;
-  }
-      */
-  return "get contributor answer";
+export async function getContributor(email) {
+    /*
+      const query = `SELECT * FROM client WHERE email = ?`;
+  
+      const results = await new Promise<any>((resolve, reject) => {
+          connection.query(query, [email], function(err, results) {
+              if (err) {
+              reject(err);
+              } else {
+              resolve(results);
+              }
+          });
+      });
+      if (results.lenght > 0) {
+        return results[0];
+    } else {
+        return undefined;
+    }
+        */
+    return "get contributor answer";
 }
-
-
-
-
 /*
 
 
 import { Request, Response } from 'express';
 
 
-async function getContributor(req: Request, res: Response) { // Est ce qu'il ne faudrait pas utiliser le modèle contributor à la place ? 
+async function getContributor(req: Request, res: Response) { // Est ce qu'il ne faudrait pas utiliser le modèle contributor à la place ?
   const userId = req.body.id;
   const query = `SELECT * FROM client WHERE id = ?`;
 
@@ -108,4 +100,5 @@ async function loginContributor(req, res) {
   })
 }
 
-*/
+*/ 
+//# sourceMappingURL=ContributorServices.js.map
