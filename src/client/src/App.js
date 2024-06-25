@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from './logo.svg';
+import './icon_C.jpg';
 import './App.css';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
@@ -10,7 +10,11 @@ function App() {
   return (
     <div className="App">
       <nav className='navbar-home'>
+        
         <ul className="navbar-list">
+          <li>
+            <a className='title'>Hydro Map</a>
+          </li>
           <li>
             <a>Home</a>
           </li>
@@ -28,9 +32,9 @@ function App() {
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           />
-          <Marker position={position}>
+          <Marker position={position} img='icon_C.jpg'>
             <Popup>
-              A pretty popup. <br /> 
+              Centrale hydrolique <br /> 
             </Popup>
           </Marker>
         </MapContainer>
