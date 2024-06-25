@@ -34,11 +34,16 @@
 .navbar-home{
   display: flex;
   flex-direction: row;
+  background-color: #61dafb;
 }
 .navbar-list{
   display: flex;
   flex-direction: row;
   gap: 40px;
+}
+.title{
+  font-size: 20px;
+  color: blue;
 }
 
 @keyframes App-logo-spin {
