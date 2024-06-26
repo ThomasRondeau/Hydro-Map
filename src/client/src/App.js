@@ -18,12 +18,12 @@ function App() {
   const position = [46.603354, 1.888334]; // Coordonnées centrales de la France
 
   useEffect(() => {
-    fetch('/api/getInterestsPoints')
+    fetch('http://localhost:9000/getInterestsPoints')
       .then(response => response.json())
       .then(data => setPoints(data))
       .catch(error => console.error('Error fetching points:', error));
 
-    fetch('/api/getPowerUnits')
+    fetch('http://localhost:9000/getPowerUnits')
       .then(response => response.json())
       .then(data => setPowerUnits(data))
       .catch(error => console.error('Error fetching power units:', error));

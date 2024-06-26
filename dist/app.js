@@ -1,9 +1,14 @@
 import express from 'express';
 import session from 'express-session';
+import cors from 'cors';
 import mapRouter from "./routes/MapDataRouter.js";
 import userRouter from "./routes/UserRouter.js";
 import viewsRouter from "./routes/ViewsRouter.js";
 const app = express();
+app.use(cors({
+    origin: 'http://localhost:3000', // Add your React app's origin here
+    credentials: true
+}));
 app.use(express.json());
 app.use(session({
     secret: 'hsfqifnqlifnvvnazpnea',
