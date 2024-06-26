@@ -1,6 +1,26 @@
 import { getPointsFromCsv, getPowerUnitsFromcsv } from "../services/MapDataServices.js";
 export async function getInterestPoints(req, res, next) {
     try {
+        const points = await getPointsFromCsv();
+        res.json(points);
+    } catch (error) {
+        console.error("Error while sending Interest points", error.message);
+        next(error);
+    }
+}
+
+export async function getPowerUnits(req, res, next) {
+    try {
+        const powerUnits = await getPowerUnitsFromcsv();
+        res.json(powerUnits);
+    } catch (error) {
+        console.error("Error while sending Power Units", error.message);
+        next(error);
+    }
+}
+/* version thomas
+export async function getInterestPoints(req, res, next) {
+    try {
         let json = JSON.stringify(await getPointsFromCsv());
         res.json(json);
     }
@@ -19,6 +39,7 @@ export async function getPowerUnits(req, res, next) {
         next(error);
     }
 }
+*/
 /*
 export async function createPCH(req, res, next){
     try {
