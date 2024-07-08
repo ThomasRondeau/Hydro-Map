@@ -42,7 +42,7 @@ body {
 
 .navbar-home {
   background-color: #282c34;
-  padding: 10px;
+  padding: 25px;
 }
 
 .navbar-list {
@@ -70,15 +70,16 @@ body {
 .footer {
   background-color: #282c34;
   color: white;
-  padding: 11px 11px;
+  padding: 4px 0px;
   position: absolute;
   bottom: 0;
   width: 100%;
   text-align: center;
 }
-.title{
+.navbar-list .title_Site{
   font-size: 20px;
-  color: blue;
+  color: rgb(158, 158, 224);
+  text-decoration: underline;
 }
 
 @keyframes App-logo-spin {

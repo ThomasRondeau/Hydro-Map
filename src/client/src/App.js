@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import './icon_C.jpg';
 import new_icon from './new_icon.png';
+import new_icon2 from './new_icon2.png';
 import './App.css';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import Papa from 'papaparse';
 import pointsData from './merged.csv';
+import additionalPointsData from './DataStationPotentiel15mLargeur.csv'
 
 
 const customIcon = L.icon({
@@ -15,10 +16,16 @@ const customIcon = L.icon({
   iconAnchor: [19, 38], 
   popupAnchor: [0, -38]
 });
-
+const customIcon2 = L.icon({
+  iconUrl: new_icon2, 
+  iconSize: [30, 30], 
+  iconAnchor: [19, 38], 
+  popupAnchor: [0, -38]
+});
 
 function App() {
   const [points, setPoints] = useState([]);
+  const [additionalPoints, setadditionalPoints] = useState ([]);
   const [powerUnits, setPowerUnits] = useState([]);
   const position = [46.603354, 1.888334]; // Coordonnées centrales de la France
 
@@ -129,8 +136,26 @@ useEffect(() => {
             const lng = parseFloat(point.longitude);
             return !isNaN(lat) && !isNaN(lng);
           });
-          //const filteredPoints = validPoints.filter((point, index) => index % 2 === 0);
-          setPoints(validPoints.slice(0, 4000)); // nbr éléments affichés
+          const filteredPoints = validPoints.filter((point, index) => index % 2 === 0); // pour réduire le lag
+          setPoints(filteredPoints.slice(0, 4000)); // nbr éléments affichés
+        },
+        error: (error) => {
+          console.error('Error parsing CSV:', error);
+        }
+      });
+
+      // Lire le deuxième fichier CSV et parser
+      Papa.parse(additionalPointsData, {
+        download: true,
+        header: true,
+        complete: (result) => {
+          const parsedData = result.data;
+          const validaddiPoints = parsedData.filter(addipoint => {
+            const lat = parseFloat(addipoint.CoordYAval);
+            const lng = parseFloat(addipoint.CoordXAval);
+            return !isNaN(lat) && !isNaN(lng);
+          });
+          setadditionalPoints(validaddiPoints.slice(0, 300));
         },
         error: (error) => {
           console.error('Error parsing CSV:', error);
@@ -142,7 +167,7 @@ useEffect(() => {
       <nav className="navbar-home">
           <ul className="navbar-list">
             <li>
-              <a to="/" className="title">Hydro Map</a>
+              <a className="title_Site">Hydro Map</a>
             </li>
             <li>
               <a to="/">Home</a>
@@ -167,6 +192,13 @@ useEffect(() => {
               <Popup>
                 {point.nomInstallation}/ puissance :
                 {point.puisMaxInstallee} MGW/H
+              </Popup>
+            </Marker>
+          ))}
+          {additionalPoints.map((addipoint, index) => (
+            <Marker key={index} position={[parseFloat(addipoint.CoordXAval), parseFloat(addipoint.CoordYAval)]} icon={customIcon2}>
+              <Popup>
+                {addipoint._id}
               </Popup>
             </Marker>
           ))}
