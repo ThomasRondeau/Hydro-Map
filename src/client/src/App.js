@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import new_icon from './new_icon.png';
-import new_icon2 from './new_icon2.png';
+import new_icon2 from './red.webp';
 import logo from './logo_hm.png';
 import './App.css';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
@@ -8,7 +8,7 @@ import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import Papa from 'papaparse';
 import pointsData from './merged.csv';
-import additionalPointsData from './DataStationPotentiel15mLargeur.csv'
+import additionalPointsData from './DataStationPotentiel15mLargeur.csv';
 
 
 const customIcon = L.icon({
@@ -27,104 +27,10 @@ const customIcon2 = L.icon({
 function App() {
   const [currentPage, setCurrentPage] = useState('home');
   const [points, setPoints] = useState([]);
-  const [additionalPoints, setadditionalPoints] = useState ([]);
-  const [powerUnits, setPowerUnits] = useState([]);
+  const [additionalPoints, setAdditionalPoints] = useState([]);
+  const [verts, setVerts] = useState([]);
   const position = [46.603354, 1.888334]; // Coordonnées centrales de la France
 
-  /*
-useEffect(() => {
-    const fetchPoints = async () => {
-      try {
-        const response = await fetch('http://localhost:9000/getInterestsPoints');
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        const data = await response.json();
-        console.log('Points:', data);
-        const parsedData = typeof data === 'string' ? JSON.parse(data) : data;
-        if (Array.isArray(parsedData)) {
-          setPoints(parsedData);
-        } else {
-          console.error('Error: Data is not an array', parsedData);
-        }
-      } catch (error) {
-        console.error('Error fetching points:', error);
-      }
-    };
-
-    const fetchPowerUnits = async () => {
-      try {
-        const response = await fetch('http://localhost:9000/getPowerUnits');
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        const data = await response.json();
-        console.log('Power Units:', data);
-        const parsedData = typeof data === 'string' ? JSON.parse(data) : data;
-        if (Array.isArray(parsedData)) {
-          setPowerUnits(parsedData);
-        } else {
-          console.error('Error: Data is not an array', parsedData);
-        }
-      } catch (error) {
-        console.error('Error fetching power units:', error);
-      }
-    };
-
-    fetchPoints();
-    fetchPowerUnits();
-  }, []);*/
-  /*
-  useEffect(() => {
-    fetch('http://localhost:9000/getInterestsPoints') 
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        console.log(response.json);
-        return response.json();
-      })
-      .then(data => {
-        if (Array.isArray(data)) {
-          setPoints(data);
-        } else {
-          console.error('Error: Data is not an array', data);
-        }
-      })
-      .catch(error => console.error('Error fetching points:', error));
-
-    fetch('http://localhost:9000/getPowerUnits') 
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        console.log(response.json);
-        return response.json();
-      })
-      .then(data => {
-        if (Array.isArray(data)) {
-          setPowerUnits(data);
-        } else {
-          console.error('Error: Data is not an array', data);
-        }
-      })
-      .catch(error => console.error('Error fetching power units:', error));
-  }, []);
-  */
-  /*{points.map((point, index) => (
-    <Marker key={index} position={[point.position.latitude, point.position.longitude]} icon={customIcon}>
-      <Popup>
-        {point.description}
-      </Popup>
-    </Marker>
-  ))}
-  {powerUnits.map((unit, index) => (
-    <Marker key={index} position={[unit.position.latitude, unit.position.longitude]} icon={customIcon}>
-      <Popup>
-        {unit.description}
-      </Popup>
-    </Marker>
-  ))}*/
     useEffect(() => {
       // Lecture du fichier CSV et parsing
       Papa.parse(pointsData, {
@@ -138,8 +44,9 @@ useEffect(() => {
             const lng = parseFloat(point.longitude);
             return !isNaN(lat) && !isNaN(lng);
           });
-          const filteredPoints = validPoints.filter((point, index) => index % 2 === 0); // pour réduire le lag
+          const filteredPoints = validPoints.filter((point, index) => index % 13 === 0); // pour réduire le lag/ points v
           setPoints(validPoints.slice(0, 4000)); // nbr éléments affichés
+          setVerts(filteredPoints);
         },
         error: (error) => {
           console.error('Error parsing CSV:', error);
@@ -152,18 +59,25 @@ useEffect(() => {
         header: true,
         complete: (result) => {
           const parsedData = result.data;
-          const validaddiPoints = parsedData.filter(addipoint => {
+          const validAddiPoints = parsedData.filter(addipoint => {
             const lat = parseFloat(addipoint.CoordYAval);
+            //console.log(lat);
             const lng = parseFloat(addipoint.CoordXAval);
+            //console.log(lng);
             return !isNaN(lat) && !isNaN(lng);
           });
-          setadditionalPoints(validaddiPoints.slice(0, 300));
+          console.log(validAddiPoints);
+          setAdditionalPoints(validAddiPoints);
+          console.log(additionalPoints);
         },
         error: (error) => {
           console.error('Error parsing CSV:', error);
-        }
+        },
       });
     }, []);
+
+    
+    
     const renderContent = () => {
       switch (currentPage) {
         case 'home':
@@ -181,10 +95,11 @@ useEffect(() => {
                     </Popup>
                   </Marker>
                 ))}
-                {additionalPoints.map((addipoint, index) => (
-                  <Marker key={index} position={[parseFloat(addipoint.CoordYAval), parseFloat(addipoint.CoordXAval)]} icon={customIcon2}>
+                
+                {verts.map((vert, index) => (
+                  <Marker key={index} position={[parseFloat(vert.latitude), parseFloat(vert.longitude)]} icon={customIcon2}>
                     <Popup>
-                      {addipoint._id}
+                      Nouvelle centrale potentielle 
                     </Popup>
                   </Marker>
                 ))}
