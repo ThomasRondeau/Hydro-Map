@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import new_icon from './new_icon.png';
 import new_icon2 from './new_icon2.png';
+import logo from './logo_hm.png';
 import './App.css';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import L from 'leaflet';
@@ -191,9 +192,39 @@ useEffect(() => {
             </div>
           );
         case 'about':
-          return <div>À propos : Cette application affiche les infrastructures hydroélectriques.</div>;
+          return (
+            <div className="about">
+              <h1>À propos</h1>
+              <p>
+                Dans le contexte mondial actuel, l'énergie renouvelable joue un rôle crucial dans la lutte contre le changement climatique et la réduction de la dépendance aux combustibles fossiles. Face à la hausse des émissions de gaz à effet de serre et à l'épuisement des ressources naturelles, les énergies renouvelables offrent une alternative durable et respectueuse de l'environnement. L'adoption croissante de ces sources d'énergie contribue non seulement à la protection de notre planète, mais aussi à la sécurité énergétique, en diversifiant les sources d'approvisionnement et en réduisant les risques liés aux fluctuations des prix du pétrole et du gaz.
+              </p>
+              <p>
+                En France, l'énergie hydroélectrique occupe une place prépondérante dans le mix énergétique. Représentant environ 12% de la production totale d'électricité du pays, elle est la première source d'énergie renouvelable utilisée. Grâce à ses nombreux barrages et installations répartis sur tout le territoire, la France exploite efficacement ses ressources en eau pour produire une énergie propre, stable et flexible. L'hydroélectricité joue un rôle clé non seulement dans la réduction des émissions de CO2, mais aussi dans la gestion de la demande électrique, en pouvant être ajustée rapidement pour répondre aux variations de consommation.
+              </p>
+              <p>
+                Ce site a été développé dans le cadre d'un projet étudiant par six élèves ingénieurs en quatrième année de notre école. Notre objectif était de créer une plateforme innovante et informative pour sensibiliser le public à l'importance de l'énergie hydroélectrique et de l'énergie renouvelable en général. En combinant nos compétences en ingénierie, en développement web, en gestion de données et en gestion de projets, nous avons réussi à concevoir cette carte interactive qui met en lumière les infrastructures hydroélectriques en France. Ce projet nous a permis de mettre en pratique nos connaissances théoriques tout en contribuant à une cause environnementale essentielle.
+              </p>
+            </div>
+          );
         case 'collaborate':
-          return <div>Collaborer : Veuillez nous contacter pour des partenariats.</div>;
+          return (
+            <div className="collaborate">
+              <div className="collaborate-content">
+                <img src={logo} alt="Logo" className="collaborate-logo" />
+                <div>
+                  <p>
+                    Nous recherchons activement des collaborateurs passionnés par la promotion et la facilitation de la mise en place d'infrastructures liées aux énergies renouvelables, en particulier dans le domaine hydroélectrique. Si vous partagez notre vision d'un avenir durable et souhaitez contribuer à l'expansion des énergies vertes, nous serions ravis de vous entendre.
+                  </p>
+                  <p>
+                    Que vous soyez un professionnel, un étudiant, ou une organisation avec des objectifs alignés avec les nôtres, votre collaboration peut faire la différence. Ensemble, nous pouvons développer des solutions innovantes et impactantes pour accélérer la transition énergétique.
+                  </p>
+                  <p>
+                    Pour nous contacter, envoyez-nous un email à <a href="mailto:contact@hydromap.com">contact@hydromap.com</a> ou appelez-nous au +33 1 23 45 67 89. Nous attendons avec impatience de collaborer avec vous pour un avenir plus vert.
+                  </p>
+                </div>
+              </div>
+            </div>
+          );
         default:
           return null;
       }
@@ -204,7 +235,7 @@ useEffect(() => {
         <nav className="navbar-home">
           <ul className="navbar-list">
             <li>
-              <a className="title_Site" onClick={() => setCurrentPage('home')}>Hydro Map</a>
+              <img src={logo} className='logo_hm'/>
             </li>
             <li>
               <a onClick={() => setCurrentPage('home')}>Home</a>

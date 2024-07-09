@@ -67,7 +67,7 @@ body {
   text-decoration: underline;
 }
 
-.footer {
+/*.footer {
   background-color: #282c34;
   color: white;
   padding: 4px 0px;
@@ -75,11 +75,54 @@ body {
   bottom: 0;
   width: 100%;
   text-align: center;
-}
+}*/
 .navbar-list .title_Site{
   font-size: 20px;
   color: rgb(158, 158, 224);
   text-decoration: underline;
+}
+.about, .collaborate {
+  max-width: 800px;
+  margin: 40px auto;
+  text-align: left;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.about h1, .collaborate h1 {
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+.about p, .collaborate p {
+  font-size: 18px;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+.footer {
+  background-color: #282c34;
+  color: white;
+  padding: 10px 0;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+}
+.collaborate-content {
+  display: flex;
+  align-items: center;
+}
+
+.collaborate-logo {
+  margin-right: 20px;
+  height: 200px; 
+  width: 190px;  
+}
+.logo_hm{
+  width: 30px;
+  height: 30px;
 }
 
 @keyframes App-logo-spin {
